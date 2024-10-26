@@ -1,0 +1,13 @@
+.main-app-wrapper {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+
+  .content-wrapper {
+    margin: auto;
+    width: 100%;
+    max-width: 1200px;
+    flex: 1;
+    padding: 20px;
+  }
+}

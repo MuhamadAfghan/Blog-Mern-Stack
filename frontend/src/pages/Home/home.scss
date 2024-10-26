@@ -1,0 +1,19 @@
+.create-wrapper {
+  width: 200px;
+  margin-right: 0;
+  margin-left: auto;
+}
+
+.content-blog-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.pagination-wrapper {
+  width: 400px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
