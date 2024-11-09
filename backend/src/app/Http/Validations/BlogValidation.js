@@ -1,6 +1,6 @@
 const { body } = require("express-validator");
 
-exports.create = [
+exports.store = [
   body("title").isLength({ min: 5 }).withMessage("Title minimal 5 karakter"),
   body("body").isLength({ min: 5 }).withMessage("Body minimal 5 karakter"),
 ];
