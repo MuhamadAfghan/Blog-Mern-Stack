@@ -2,10 +2,10 @@
   "name": "backend-blog-mern",
   "version": "1.0.0",
   "description": "REST API blog mern stack",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "dev": "nodemon server.js"
   },
   "author": "MuhamadAfghan",
   "license": "ISC",

@@ -9,7 +9,7 @@
 # production
 /build
 api-planning.txt
-/images
+/src/public/images
 
 # misc
 .DS_Store

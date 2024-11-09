@@ -1,8 +1,8 @@
 const { validationResult } = require("express-validator");
-const BlogPost = require("../models/blog");
+const { Blog } = require("../../models/models");
 
 exports.index = (req, res, next) => {
-  BlogPost.find()
+  Blog.find()
     .then((result) => {
       res.status(200).json({
         message: "Data blog berhasil dipanggil",
@@ -15,7 +15,7 @@ exports.index = (req, res, next) => {
 exports.show = (req, res, next) => {
   const postId = req.params.postId;
 
-  BlogPost.findById(postId)
+  Blog.findById(postId)
     .then((result) => {
       if (!result) {
         const error = new Error("Data not found");
@@ -28,7 +28,7 @@ exports.show = (req, res, next) => {
         data: result,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => next(err)); // Pass the error to the next middleware
 };
 
 exports.store = (req, res, next) => {
@@ -38,38 +38,24 @@ exports.store = (req, res, next) => {
     const err = new Error("Invalid value");
     err.errorStatus = 400;
     err.data = errors.array();
-    throw err;
+    return next(err); // Pass the error to the next middleware
   }
 
-  if (!req.file) {
-    const err = new Error("Image must be uploaded");
-    err.errorStatus = 422;
-    throw err;
-  }
-
-  const title = req.body.title;
-  const body = req.body.body;
-  const image = req.file.path;
-
-  const Posting = new BlogPost({
-    title: title,
-    body: body,
-    image: image,
-    author: {
-      uid: 1,
-      name: "John Doe",
-      email: "johndoe@gmail.com",
-    },
+  const { title, content } = req.body;
+  const blog = new Blog({
+    title,
+    content,
   });
 
-  Posting.save()
+  blog
+    .save()
     .then((result) => {
       res.status(201).json({
-        message: "Create new blog success",
+        message: "Blog created successfully",
         data: result,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => next(err)); // Pass the error to the next middleware
 };
 
 exports.update = (req, res, next) => {
@@ -93,8 +79,7 @@ exports.update = (req, res, next) => {
   const image = req.file.path;
   const postId = req.params.postId;
 
-  BlogPost.findById(postId)
-
+  Blog.findById(postId)
     .then((post) => {
       if (!post) {
         const err = new Error("Data not found");
@@ -114,13 +99,13 @@ exports.update = (req, res, next) => {
         data: result,
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => next(err)); // Pass the error to the next middleware
 };
 
 exports.destroy = (req, res, next) => {
   const postId = req.params.postId;
 
-  BlogPost.findById(postId)
+  Blog.findById(postId)
     .then((post) => {
       if (!post) {
         const err = new Error("Data not found");
@@ -128,7 +113,7 @@ exports.destroy = (req, res, next) => {
         throw err;
       }
 
-      return BlogPost.findByIdAndRemove(postId);
+      return Blog.findByIdAndRemove(postId);
     })
     .then((result) => {
       res.status(200).json({
