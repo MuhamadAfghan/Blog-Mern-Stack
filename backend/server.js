@@ -11,7 +11,7 @@ const cors = require("./src/app/Http/Middlewares/cors");
 const errorHandler = require("./src/app/Http/Middlewares/errorHandler");
 
 app.use(bodyParser.json());
-app.use("/", express.static(path.join(__dirname, "src/public")));
+app.use("/storage", express.static(path.join(__dirname, "storage")));
 app.use(upload.single("image"));
 app.use(cors);
 

@@ -8,7 +8,7 @@ const DetailBlog = () => {
   const navigate = useNavigate();
   return (
     <div className="detail-blog-wrapper">
-      <div class="button-back">
+      <div className="button-back">
         <Button onClick={() => navigate("/")}>Kembali</Button>
       </div>
       <Gap height={20} />

@@ -8,7 +8,7 @@ const CreateBlog = () => {
   return (
     <div>
       <Gap height={20} />
-      <div class="button-back">
+      <div className="button-back">
         <Button onClick={() => navigate("/")}>Back</Button>
       </div>
       <Gap height={10} />
@@ -20,7 +20,7 @@ const CreateBlog = () => {
         <Gap height={10} />
         <Textarea />
         <Gap height={20} />
-        <div class="button-action">
+        <div className="button-action">
           <Button type="submit">Publish</Button>
         </div>
       </form>

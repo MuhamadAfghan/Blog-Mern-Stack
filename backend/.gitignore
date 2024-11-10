@@ -10,6 +10,7 @@
 /build
 api-planning.txt
 /src/public/images
+/storage
 
 # misc
 .DS_Store

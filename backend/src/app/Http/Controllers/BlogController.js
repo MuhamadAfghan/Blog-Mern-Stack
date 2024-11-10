@@ -67,6 +67,10 @@ exports.store = (req, res, next) => {
   const blog = new Blog({
     title,
     body,
+    author: {
+      _id: 1,
+      name: "Muhamad Afghan",
+    },
     image: req.file.path,
   });
 
