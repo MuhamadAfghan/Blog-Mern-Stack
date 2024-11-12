@@ -7,7 +7,7 @@ const Input = ({ label, ...rest }) => {
 
   return (
     <div className="input-container">
-      <label for={id}>{label}</label>
+      <label htmlFor={id}>{label}</label>
       <input id={id} {...rest} />
     </div>
   );

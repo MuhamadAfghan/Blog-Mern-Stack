@@ -21,12 +21,13 @@ const Home = () => {
   const previous = () => {
     if (currentPage === 1) return;
     setCurrentPage(currentPage - 1);
-    navigate(`?page=${currentPage}`);
+    navigate(`?page=${currentPage - 1}`);
   };
 
   const next = () => {
     if (currentPage === page.totalPage) return;
     setCurrentPage(currentPage + 1);
+
     navigate(`?page=${currentPage}`);
   };
 
