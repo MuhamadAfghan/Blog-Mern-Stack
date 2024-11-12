@@ -1,5 +1,9 @@
 const initialStateHome = {
   allPosts: [],
+  page: {
+    currentPage: 1,
+    totalPage: 1,
+  },
 };
 
 const homeReducer = (state = initialStateHome, action) => {
@@ -8,6 +12,14 @@ const homeReducer = (state = initialStateHome, action) => {
       // copy state
       ...state,
       allPosts: action.payload,
+    };
+  }
+
+  if (action.type === "UPDATE_PAGE") {
+    return {
+      // copy state
+      ...state,
+      page: action.payload,
     };
   }
 

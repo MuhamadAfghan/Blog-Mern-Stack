@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BlogItem, Button, Gap } from "../../components";
 import "./home.scss";
 import { useNavigate } from "react-router-dom";
@@ -7,14 +7,28 @@ import { setPosts } from "../../config/redux/action/homeAction";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { allPosts } = useSelector((state) => state.homeReducer);
+  const { allPosts, page } = useSelector((state) => state.homeReducer);
+  const [currentPage, setCurrentPage] = useState(page.currentPage);
   const dispatch = useDispatch();
 
   console.log("data state global:", allPosts);
+  console.log("current page", page);
 
   useEffect(() => {
-    dispatch(setPosts());
-  }, [dispatch]);
+    dispatch(setPosts(currentPage));
+  }, [dispatch, currentPage]);
+
+  const previous = () => {
+    if (currentPage === 1) return;
+    setCurrentPage(currentPage - 1);
+    navigate(`?page=${currentPage}`);
+  };
+
+  const next = () => {
+    if (currentPage === page.totalPage) return;
+    setCurrentPage(currentPage + 1);
+    navigate(`?page=${currentPage}`);
+  };
 
   return (
     <div className="home-page-wrapper">
@@ -39,9 +53,14 @@ const Home = () => {
           })}
       </div>
       <div className="pagination-wrapper">
-        <Button>Previous</Button>
+        <Button onClick={previous}>Previous</Button>
         <Gap width={20} />
-        <Button>Next</Button>
+        <p className="text-page">
+          {" "}
+          {currentPage} / {page.totalPage}
+        </p>
+        <Gap width={20} />
+        <Button onClick={next}>Next</Button>
       </div>
     </div>
   );
